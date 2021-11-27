@@ -5,11 +5,13 @@ setup a firebase project, and create database firestore, and enable authenticati
 to deploy front end to firebase:
 install firebase cli with : npm i -g firebase-tools
 firebase login
+delete the existing firebase config files from the clone
 firebase init
 select hosting
 select project on firebase
 public directory? build
-selected auto deploy with github
+single page app yes
+npm run build
 then firebase deploy
 
 after 24 hours, ssl should be good.
