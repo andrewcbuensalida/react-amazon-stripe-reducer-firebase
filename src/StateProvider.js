@@ -6,10 +6,7 @@ export const StateContext = createContext();
 // Wrap our app and provide the Data layer
 export const StateProvider = ({ reducer, initialState, children }) => (
 	// useReducer returns an array of [state, dispatch], state being in the form of
-	//  {
-	// 	    basket: [],
-	// 	    user: null,
-	//    }
+	//  {basket: [],user: null,}
 	<StateContext.Provider value={useReducer(reducer, initialState)}>
 		{children}
 	</StateContext.Provider>

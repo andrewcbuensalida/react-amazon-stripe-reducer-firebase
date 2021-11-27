@@ -24,6 +24,7 @@ const reducer = (state, action) => {
 			};
 
 		case "REMOVE_FROM_BASKET":
+			// instead of below, could probably use for loop, then if action.id==basketItem.id, splice then break.
 			const index = state.basket.findIndex(
 				(basketItem) => basketItem.id === action.id
 			);
