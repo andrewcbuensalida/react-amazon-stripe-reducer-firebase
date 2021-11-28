@@ -12,7 +12,9 @@ select project on firebase
 public directory? build
 single page app yes
 npm run build
+go to firebase console, upgrade to blaze plan because using firebase functions
 then firebase deploy
+now add a custom domain. set it up in aws route 53.
 
 after 24 hours, ssl should be good.
 
