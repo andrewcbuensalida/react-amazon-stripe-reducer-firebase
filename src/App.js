@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./Header";
 import Home from "./Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Checkout from "./Checkout";
+import Basket from "./Basket";
 import Login from "./Login";
 import Payment from "./Payment";
 import Orders from "./Orders";
@@ -16,6 +16,8 @@ import { Elements } from "@stripe/react-stripe-js";
 const promise = loadStripe(
 	"pk_test_51Jj85AF5aEhL0aJtHOWaLQeHPEbnbfqJEiOcLXVjCTRRbjzlDrsh5K5PJPTlEpri0NIClZLWRNiv97urYr5M5KyC009D2NLttw"
 );
+
+// flow of purchasing an item is: in home, click add to basket, then click on basket in upper right which brings to basket. now click proceed to checkout page to go to payment. click buy now to charge card and go to orders.
 
 function App() {
 	const [{}, dispatch] = useStateValue();
@@ -54,9 +56,9 @@ function App() {
 					<Route path="/login">
 						<Login />
 					</Route>
-					<Route path="/checkout">
+					<Route path="/Basket">
 						<Header />
-						<Checkout />
+						<Basket />
 					</Route>
 					<Route path="/payment">
 						<Header />
