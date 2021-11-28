@@ -11,7 +11,8 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 const app = express();
 
 // - Middlewares
-app.use(cors({ origin: true }));
+// app.use(cors({origin:'https://amazon.anhonestobserver.com'})); //uncomment this in production
+app.use(cors()); //comment this in production
 app.use(express.json());
 
 // - API routes
@@ -20,8 +21,9 @@ app.get("/", (request, response) => response.status(200).send("hello world"));
 app.post("/payments/create", async (request, response) => {
 	const total = request.query.total;
 
-	console.log("Payment Request Recieved BOOM!!! for this amount >>> ", total);
+	console.log("Getting the payment ready for this amount >>> ", total);
 
+	// making stripe server create a secret key for the transaction, then will be sent to fron-end
 	const paymentIntent = await stripe.paymentIntents.create({
 		amount: total, // subunits of the currency
 		currency: "usd",
