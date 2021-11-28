@@ -23,7 +23,7 @@ function Payment() {
 	const [error, setError] = useState(null);
 	// only for if the card input is empty
 	const [disabled, setDisabled] = useState(true);
-	const [clientSecret, setClientSecret] = useState(true);
+	const [clientSecret, setClientSecret] = useState(null);
 
 	useEffect(() => {
 		// get secret from node server, which got it from stripe.
@@ -89,7 +89,7 @@ function Payment() {
 					dispatch({
 						type: "EMPTY_BASKET",
 					});
-
+					// use Redirect component if it's a protected page. like in instagram clone. use history.replace if you need to prevent user from pressing back button, like after a payment page.
 					history.replace("/orders");
 				} else {
 					setError(error.message);

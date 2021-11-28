@@ -51,6 +51,9 @@
 	color: #111;
 	cursor: pointer;
 }
+.payment__details > form > div > button:disabled {
+	cursor: not-allowed;
+}
 
 .payment__cardElement {
 	margin-bottom: 5px;
