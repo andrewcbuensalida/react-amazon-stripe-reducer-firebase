@@ -62,7 +62,7 @@ function Payment() {
 				if (paymentIntent) {
 					db.collection("users")
 						// uid is from firebase
-						.doc(user?.uid)
+						.doc(user ? user.uid : "guest")
 						.collection("orders")
 						.doc(paymentIntent.id)
 						.set({
@@ -75,6 +75,17 @@ function Payment() {
 					setError(null);
 					setProcessing(false);
 
+					dispatch({
+						type: "SET_COMPLETED_ORDER",
+						payload: {
+							id: paymentIntent.id,
+							data: {
+								basket: basket,
+								amount: paymentIntent.amount,
+								created: paymentIntent.created,
+							},
+						},
+					});
 					dispatch({
 						type: "EMPTY_BASKET",
 					});

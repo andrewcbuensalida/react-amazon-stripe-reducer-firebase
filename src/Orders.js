@@ -5,8 +5,8 @@ import { useStateValue } from "./StateProvider";
 import Order from "./Order";
 
 function Orders() {
-	const [{ basket, user }, dispatch] = useStateValue();
-	const [orders, setOrders] = useState([]);
+	const [{ basket, user, completedOrder }, dispatch] = useStateValue();
+	const [pastOrders, setPastOrders] = useState([]);
 
 	useEffect(() => {
 		if (user) {
@@ -15,7 +15,7 @@ function Orders() {
 				.collection("orders")
 				.orderBy("created", "desc")
 				.onSnapshot((snapshot) =>
-					setOrders(
+					setPastOrders(
 						snapshot.docs.map((doc) => ({
 							id: doc.id,
 							data: doc.data(),
@@ -23,26 +23,31 @@ function Orders() {
 					)
 				);
 		} else {
-			setOrders([]);
+			setPastOrders([]);
 		}
 	}, [user]);
 
 	return (
 		<div className="orders">
-			<h1>Your Order is Complete.</h1>
-
 			<div className="orders__order">
-				{orders?.map((order, index) => {
-					if (index == 0) {
-						return (
-							<>
-								<Order order={order} />
-								<h1>Past Orders</h1>
-							</>
-						);
-					} else {
-						return <Order order={order} />;
+				{completedOrder && (
+					<>
+						<h1>Your Order is Complete.</h1>
+						<Order order={completedOrder} />
+					</>
+				)}
+
+				{pastOrders.length > 0 ? (
+					<h1>Past Orders</h1>
+				) : (
+					<h1>No Past Orders</h1>
+				)}
+				{pastOrders.map((order, index) => {
+					// if there is a completed order, and past orders, the completed order wont be rendered twice
+					if (completedOrder && index == 0) {
+						return;
 					}
+					return <Order order={order} />;
 				})}
 			</div>
 		</div>

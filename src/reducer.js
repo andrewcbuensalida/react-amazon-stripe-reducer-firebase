@@ -1,6 +1,7 @@
 export const initialState = {
 	basket: [],
 	user: null,
+	completedOrder: null,
 };
 
 // Selector
@@ -47,8 +48,16 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				user: action.user,
+				completedOrder: null,
 			};
-
+		case "SET_COMPLETED_ORDER":
+			return {
+				...state,
+				completedOrder: {
+					id: action.payload.id,
+					data: action.payload.data,
+				},
+			};
 		default:
 			return state;
 	}
