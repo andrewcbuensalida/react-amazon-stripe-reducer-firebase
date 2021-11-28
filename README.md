@@ -28,3 +28,7 @@ stripe:
 go in functions folder, then npm run deploy. this runs firebase deploy --only functions.
 it will give you a function URL. copy paste into axios.js
 in the stripe console, publishable key can be made public, but not the secret key.
+
+TODO:
+scroll to top on basket and payment page.
+no user checkout.

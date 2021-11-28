@@ -17,10 +17,11 @@ function Payment() {
 
 	const stripe = useStripe();
 	const elements = useElements();
-
+	// if succeeded, disables the buy now button
 	const [succeeded, setSucceeded] = useState(false);
 	const [processing, setProcessing] = useState("");
 	const [error, setError] = useState(null);
+	// only for if the card input is empty
 	const [disabled, setDisabled] = useState(true);
 	const [clientSecret, setClientSecret] = useState(true);
 
@@ -55,7 +56,7 @@ function Payment() {
 					card: elements.getElement(CardElement),
 				},
 			})
-			.then(({ paymentIntent }) => {
+			.then(({ paymentIntent, error }) => {
 				// paymentIntent = payment confirmation. if the card is declined, paymentIntent will be inside an error object
 
 				if (paymentIntent) {
@@ -79,6 +80,9 @@ function Payment() {
 					});
 
 					history.replace("/orders");
+				} else {
+					setError(error.message);
+					setProcessing(false);
 				}
 			});
 	};
@@ -143,7 +147,7 @@ function Payment() {
 
 						<form onSubmit={handleSubmit}>
 							{/* wrap CardElement so can put a border */}
-							<div className="cardElement">
+							<div className="payment__cardElement">
 								{/* CardElement is from Stripe */}
 								<CardElement
 									options={{
@@ -180,7 +184,11 @@ function Payment() {
 							</div>
 
 							{/* Errors if card input is invalid */}
-							{error && <div>{error}</div>}
+							{error && (
+								<div className="payment__errorMessage">
+									{error}
+								</div>
+							)}
 						</form>
 					</div>
 				</div>
