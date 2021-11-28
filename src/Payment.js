@@ -5,7 +5,7 @@ import FlipMove from "react-flip-move";
 
 import "./Payment.css";
 import { useStateValue } from "./StateProvider";
-import CheckoutProduct from "./CheckoutProduct";
+import BasketProduct from "./BasketProduct";
 import { Link, useHistory } from "react-router-dom";
 import { getBasketTotal } from "./reducer";
 import axios from "./axios";
@@ -29,7 +29,7 @@ function Payment() {
 		const getClientSecret = async () => {
 			const response = await axios({
 				method: "post",
-				// Stripe expects the total in a currencies subunits
+				// Stripe expects the total in a currencies subunits. this is sent to express function.
 				url: `/payments/create?total=${getBasketTotal(basket) * 100}`,
 			});
 			setClientSecret(response.data.clientSecret);
@@ -51,31 +51,35 @@ function Payment() {
 			// sending secret key from node server to stripe server to see if it matches
 			.confirmCardPayment(clientSecret, {
 				payment_method: {
+					// elements is from useElements above, CardElement is the card input below
 					card: elements.getElement(CardElement),
 				},
 			})
 			.then(({ paymentIntent }) => {
-				// paymentIntent = payment confirmation
+				// paymentIntent = payment confirmation. if the card is declined, paymentIntent will be inside an error object
 
-				db.collection("users")
-					.doc(user?.uid)
-					.collection("orders")
-					.doc(paymentIntent.id)
-					.set({
-						basket: basket,
-						amount: paymentIntent.amount,
-						created: paymentIntent.created,
+				if (paymentIntent) {
+					db.collection("users")
+						// uid is from firebase
+						.doc(user?.uid)
+						.collection("orders")
+						.doc(paymentIntent.id)
+						.set({
+							basket: basket,
+							amount: paymentIntent.amount,
+							created: paymentIntent.created,
+						});
+
+					setSucceeded(true);
+					setError(null);
+					setProcessing(false);
+
+					dispatch({
+						type: "EMPTY_BASKET",
 					});
 
-				setSucceeded(true);
-				setError(null);
-				setProcessing(false);
-
-				dispatch({
-					type: "EMPTY_BASKET",
-				});
-
-				history.replace("/orders");
+					history.replace("/orders");
+				}
 			});
 	};
 
@@ -93,8 +97,7 @@ function Payment() {
 		<div className="payment">
 			<div className="payment__container">
 				<h1>
-					Checkout (<Link to="/checkout">{basket?.length} items</Link>
-					)
+					Basket (<Link to="/Basket">{basket?.length} items</Link>)
 				</h1>
 
 				{/* Payment section - delivery address */}
@@ -117,7 +120,7 @@ function Payment() {
 					<div className="payment__items">
 						<FlipMove>
 							{basket.map((item) => (
-								<CheckoutProduct
+								<BasketProduct
 									key={item.id}
 									id={item.id}
 									title={item.title}

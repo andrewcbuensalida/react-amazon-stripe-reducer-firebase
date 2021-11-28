@@ -20,7 +20,9 @@ after 24 hours, ssl should be good.
 
 couldnt get github auto deploy to work
 
-workflow is npm run build, then firebase deploy
+workflow is during development, npm run start in the root folder for the front end, then npm run serve in the functions folder to emulate cloud functions but locally. this will give a link to the emulator, then change axios base url to that one. this still hits the firestore and stripe api.
+when ready to deploy, npm run build, then firebase deploy if changed the front and back end.
+if just the front end, firebase deploy --except functions. if just backend, firebase deploy --only functions.
 
 stripe:
 go in functions folder, then npm run deploy. this runs firebase deploy --only functions.

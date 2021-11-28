@@ -29,12 +29,21 @@ function Orders() {
 
 	return (
 		<div className="orders">
-			<h1>Your Orders</h1>
+			<h1>Your Order is Complete.</h1>
 
 			<div className="orders__order">
-				{orders?.map((order) => (
-					<Order order={order} />
-				))}
+				{orders?.map((order, index) => {
+					if (index == 0) {
+						return (
+							<>
+								<Order order={order} />
+								<h1>Past Orders</h1>
+							</>
+						);
+					} else {
+						return <Order order={order} />;
+					}
+				})}
 			</div>
 		</div>
 	);

@@ -21,9 +21,10 @@ app.get("/", (request, response) => response.status(200).send("hello world"));
 app.post("/payments/create", async (request, response) => {
 	const total = request.query.total;
 
+	// this will be seen in firebase functions logs
 	console.log("Getting the payment ready for this amount >>> ", total);
 
-	// making stripe server create a secret key for the transaction, then will be sent to fron-end
+	// making stripe server create a secret key for the transaction, then will be sent to fron-end. in stripe dashboard, this can be seen in the events section and in the logs.
 	const paymentIntent = await stripe.paymentIntents.create({
 		amount: total, // subunits of the currency
 		currency: "usd",
