@@ -11,6 +11,7 @@ import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import ScrollToTop from "./ScrollToTop";
 
 // need to put my own
 const promise = loadStripe(
@@ -57,6 +58,7 @@ function App() {
 						<Login />
 					</Route>
 					<Route path="/Basket">
+						<ScrollToTop />
 						<Header />
 						<Basket />
 					</Route>
