@@ -27,7 +27,7 @@ function App() {
 		// will only run once when the app component loads...
 
 		auth.onAuthStateChanged((authUser) => {
-			console.log("THE USER IS >>> ", authUser);
+			// console.log("THE USER IS >>> ", authUser);
 
 			if (authUser) {
 				// the user just logged in / the user was logged in
@@ -58,6 +58,7 @@ function App() {
 						<Login />
 					</Route>
 					<Route path="/Basket">
+						{/* scrolls to top when navigating to basket page */}
 						<ScrollToTop />
 						<Header />
 						<Basket />
@@ -68,6 +69,7 @@ function App() {
 							<Payment />
 						</Elements>
 					</Route>
+					{/* this should be at the bottom so it doesnt match to anything else */}
 					<Route path="/">
 						<Header />
 						<Home />

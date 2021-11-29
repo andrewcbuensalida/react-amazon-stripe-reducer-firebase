@@ -14,6 +14,7 @@ function Orders() {
 				.doc(user?.uid)
 				.collection("orders")
 				.orderBy("created", "desc")
+				// onsnapshop creates a real-time listener so when orders change, it updates
 				.onSnapshot((snapshot) =>
 					setPastOrders(
 						snapshot.docs.map((doc) => ({
@@ -25,6 +26,7 @@ function Orders() {
 		} else {
 			setPastOrders([]);
 		}
+		// whenever using outside variable, have to put in here
 	}, [user]);
 
 	return (
