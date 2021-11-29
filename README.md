@@ -34,3 +34,22 @@ firebase init
 choose functions
 this will create functions folder
 inside this folder theres node_modules and package.json
+
+Access to XMLHttpRequest at 'https://us-central1-clone-b8548.cloudfunctions.net/api/payments/create?total=0' from origin 'https://amazon.anhonestobserver.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+This doesnt seem to affect the app. but if you want to remove this error, maybe in functions, instead of send(), do json() as a response.
+
+CSS RESPONSIVE DESIGN:======================================================
+laptop widths are 1200px, heights are 700px.
+large mobile is 400px, height 800px
+inline elements are not affected by width and height, slightly with padding, horizontally with margin. if you want it to be affected, should be inline-block.
+put google fonts link including preload before the css link
+a tags inherit font size and weight but not other properties like color because they have default styles, same thing for headers.
+percentage are mainly userd for widths, they are relative to the parent. height is sometimes based on width.
+for responsive, use max-width to prevent something from getting too big.
+if there's a width and a max-width, it gets the lower value.
+for width, use em or %
+for font-size, use rem. to prevent exponential.
+em are relative to PARENTS font size while rem are relative to the ROOT which is html{}
+1.5rem = 150%
+default on browsers is 16px font-size.
+padding and margin use em.
