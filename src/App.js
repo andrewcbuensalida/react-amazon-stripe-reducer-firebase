@@ -15,7 +15,7 @@ import ScrollToTop from "./ScrollToTop";
 
 // need to put my own
 const promise = loadStripe(
-	"pk_test_51Jj85AF5aEhL0aJtHOWaLQeHPEbnbfqJEiOcLXVjCTRRbjzlDrsh5K5PJPTlEpri0NIClZLWRNiv97urYr5M5KyC009D2NLttw"
+	"pk_live_51Jj85AF5aEhL0aJtyFEgKl7WmjDGV1N3ewWCQCgr8lLoGNGtBjlFxy1uf18JMsfh8lv3hIQBgN38AaQdcWoI9B6E00MAbCukIZ"
 );
 
 // flow of purchasing an item is: in home, click add to basket, then click on basket in upper right which brings to basket. now click proceed to checkout page to go to payment. click buy now to charge card and go to orders.

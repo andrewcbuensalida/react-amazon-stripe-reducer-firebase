@@ -11,8 +11,8 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 const app = express();
 
 // - Middlewares
-// app.use(cors({origin:'https://amazon.anhonestobserver.com'})); //uncomment this in production
-app.use(cors()); //comment this in production
+app.use(cors({ origin: "https://amazon.anhonestobserver.com" })); //uncomment this in production
+// app.use(cors()); //comment this in production
 app.use(express.json());
 
 // - API routes
