@@ -52,10 +52,10 @@ function Header() {
 					</div>
 				</Link>
 
-				<div className="header__option">
+				{/* <div className="header__option">
 					<span className="header__optionLineOne">Your</span>
 					<span className="header__optionLineTwo">Prime</span>
-				</div>
+				</div> */}
 
 				<Link to="/Basket">
 					<div className="header__optionBasket">
