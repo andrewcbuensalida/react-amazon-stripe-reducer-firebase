@@ -22,10 +22,10 @@ function Home() {
 					/>
 					<Product
 						id="49538094"
-						title="Kenwood kMix Stand Mixer for Baking, Stylish Kitchen Mixer with K-beater, Dough Hook and Whisk, 5 Litre Glass Bowl"
-						price={239.0}
-						rating={4}
-						image="https://images-na.ssl-images-amazon.com/images/I/81O%2BGNdkzKL._AC_SX450_.jpg"
+						title="This donation will go to me because I'm broke."
+						price={1.0}
+						rating={5}
+						image="./images/katt-yukawa-K0E6E0a0R3A-unsplash.jpg"
 					/>
 				</div>
 
