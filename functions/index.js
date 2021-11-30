@@ -11,7 +11,7 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 const app = express();
 
 // - Middlewares
-app.use(cors({ origin: "https://amazon.anhonestobserver.com" })); //uncomment this in production
+app.use(cors({ origin: "https://amazon.anhonestobserver.com" })); //uncomment this in production. this line is really important because if hackers make a request where they reduced the price, it wont work because the origin wont be amazon.anhonestobserver.com
 // app.use(cors()); //comment this in production
 app.use(express.json());
 
@@ -31,7 +31,7 @@ app.post("/payments/create", async (request, response) => {
 	});
 
 	// OK - Created
-	response.status(201).send({
+	response.status(201).json({
 		clientSecret: paymentIntent.client_secret,
 	});
 });

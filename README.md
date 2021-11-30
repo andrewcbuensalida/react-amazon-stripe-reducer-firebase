@@ -43,13 +43,41 @@ laptop widths are 1200px, heights are 700px.
 large mobile is 400px, height 800px
 inline elements are not affected by width and height, slightly with padding, horizontally with margin. if you want it to be affected, should be inline-block.
 put google fonts link including preload before the css link
+units=================================================================
 a tags inherit font size and weight but not other properties like color because they have default styles, same thing for headers.
-percentage are mainly userd for widths, they are relative to the parent. height is sometimes based on width.
-for responsive, use max-width to prevent something from getting too big.
+percentage are mainly used for widths, they are relative to the parent. height is sometimes based on width.
+for responsive, use max-width to prevent something from getting too big, like on images, containers,
 if there's a width and a max-width, it gets the lower value.
 for width, use em or %
 for font-size, use rem. to prevent exponential.
 em are relative to PARENTS font size while rem are relative to the ROOT which is html{}
+but if it's a different property other than font-size, such as padding, em are relative to the font size of the element itself.
 1.5rem = 150%
 default on browsers is 16px font-size.
 padding and margin use em.
+use % if you know how many total columns and dividing divs among it
+flex=====================================================================
+normally, divs will have 100% width of the container (even if we set width to less than 100%) and stack vertically, but with display flex, theyll be side by side horizontally, and width will only be it's content, and the height will be 100%.
+if you do align-items:flex-start, the height will shrink to fit content only
+<selector>:last-child applies to the last of the that selector, not the last child that's a child of that selector.
+usually have margin: 0 on the body
+to change the width of columns, could do the bootstrap way of giving a column a class col-2 which means it takes 50% of the container assuming total number of containers is 4. col-3 would take 75% of the container.
+or give it flex:.25 for a width of 1 column, flex:.5 for a width of 2 columns, etc again assuming total columns is 4.
+media query==================================================================
+if doing mobile first,
+@media (min-width:650px){
+    <!-- desktop styling -->
+}
+note that the bigger min-width is below smaller one to work
+if doing desktop first, do this below the desktop styling. media queries always after the selector that you want to change.
+@media (max-width:675px){
+    <!-- mobile styling -->
+    .column{
+        flex-direction:column
+    }
+    .col{
+        90%
+    }
+}
+==============================================================================
+always have a a:focus if you have a a:hover
