@@ -11,7 +11,7 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 const app = express();
 
 // - Middlewares
-app.use(cors({ origin: "https://amazon.anhonestobserver.com" })); //uncomment this in production. this line is really important because if hackers make a request where they reduced the price, it wont work because the origin wont be amazon.anhonestobserver.com
+app.use(cors({ origin: "https://amazon.anhonestobserver.com" })); //uncomment this in production. this line is really important because if hackers make a request where they reduced the price, it wont work because the origin wont be amazon.anhonestobserver.com. actually, when i make a request from postman, i still get the secret key. so i guess hackers could use postman to get a secret key, but i guess it doesnt matter because what's important is what's in the firestore database order, which i protected by restricting firebase apiKey to only my domain, even though they can inspect it in Chrome.
 // app.use(cors()); //comment this in production
 app.use(express.json());
 
@@ -30,7 +30,7 @@ app.post("/payments/create", async (request, response) => {
 		currency: "usd",
 	});
 
-	// OK - Created
+	// OK - Created. i changed this from send to json, dont know if it's wrong but it works. still getting cors after purchase, but not on checkout. cors only happens when basket becomes empty.
 	response.status(201).json({
 		clientSecret: paymentIntent.client_secret,
 	});
